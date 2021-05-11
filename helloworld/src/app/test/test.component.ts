@@ -92,6 +92,7 @@ saludar(){
   console.log(this.saludo);
 }
 // <h2>{{saludar()}}</h2>
+//test
 
 //properties of DOM event
 onClick(event){
