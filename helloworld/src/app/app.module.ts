@@ -9,7 +9,8 @@ import { ParentComponent } from './main/parent/parent.component'
 import { ChildComponent } from './main/parent/child/child.component'
 import { ServiciosComponent } from './main/servicios/servicios.component'
 import { MainComponent } from './main/main.component'
-import { PersonasService } from './personas.service'
+import { PersonasService } from './persona.service'
+import { HttpClientModule } from '@angular/common/http'
 
 @NgModule({
     declarations: [
@@ -21,8 +22,8 @@ import { PersonasService } from './personas.service'
         ServiciosComponent,
         MainComponent,
     ],
-    imports: [BrowserModule, FormsModule],
-    providers: [PersonasService],
+    imports: [BrowserModule, FormsModule, HttpClientModule],
+    providers: [PersonasService], //HttpClientModule gets added automatically
     bootstrap: [AppComponent],
 })
 export class AppModule {}
