@@ -11,6 +11,8 @@ import { ServiciosComponent } from './main/servicios/servicios.component'
 import { MainComponent } from './main/main.component'
 import { PersonasService } from './persona.service'
 import { HttpClientModule } from '@angular/common/http'
+import { AppRoutingModule } from './app-routing.module';
+
 
 @NgModule({
     declarations: [
@@ -22,7 +24,7 @@ import { HttpClientModule } from '@angular/common/http'
         ServiciosComponent,
         MainComponent,
     ],
-    imports: [BrowserModule, FormsModule, HttpClientModule],
+    imports: [BrowserModule, FormsModule, HttpClientModule,AppRoutingModule],
     providers: [PersonasService], //HttpClientModule gets added automatically
     bootstrap: [AppComponent],
 })
