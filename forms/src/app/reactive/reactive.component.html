@@ -1,0 +1,41 @@
+<p>reactive forms</p>
+<div class="container-fluid">
+  <h2>Registrarse</h2>
+  <form [formGroup]="registrationForm">
+    <div class="form-group">
+      <label>Username</label>
+      <input formControlName="username" type="text" class="form-control" />
+    </div>
+
+    <div class="form-group">
+      <label>Pass</label>
+      <input formControlName="pass" type="password" class="form-control" />
+    </div>
+
+    <div class="form-group">
+      <label>confirm Pass</label>
+      <input
+        formControlName="confirmPass"
+        type="password"
+        class="form-control"
+      />
+    </div>
+
+    <div formGroupName="dire">
+      <div class="form-group">
+        <label>ciudad</label>
+        <input formControlName="city" type="text" class="form-control" />
+      </div>
+      <div class="form-group">
+        <label>pais</label>
+        <input formControlName="pais" type="text" class="form-control" />
+      </div>
+    </div>
+
+    <button class="btn btn-primary" type="submit">register</button>
+    <button (click)="loadAPI()" class="btn btn-secondary ml-2" type="submit">
+      Load API data
+    </button>
+  </form>
+  {{ registrationForm.value | json }}
+</div>

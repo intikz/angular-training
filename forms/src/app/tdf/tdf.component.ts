@@ -1,15 +1,14 @@
-import { Component } from '@angular/core';
-import { User } from './user';
-import { EnrollmentService } from './enrollment.service';
+import { Component, OnInit } from '@angular/core';
+import { User } from '../user';
+import { EnrollmentService } from '../enrollment.service';
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styles: [],
-  //'./app.component.css'
+  selector: 'app-tdf',
+  templateUrl: './tdf.component.html',
+  styleUrls: []
 })
-export class AppComponent {
-  title = 'forms';
+
+export class TDFComponent implements OnInit {
   topics = ['Angular', 'React', 'Vue'];
   topicHasError = true;
   submitted = false;
@@ -33,7 +32,7 @@ export class AppComponent {
   }
 
   onSubmit(userForm) {
-    console.log(userForm);
+    console.log(userForm)
     // this._enrollmentService.enroll(this.userModel).subscribe(
     //   (data) => {
     //     console.log('success!', data);
@@ -41,5 +40,8 @@ export class AppComponent {
     //   },
     //   (error) => (this.errorMsg = error.statusText)
     // );
+  }
+
+  ngOnInit(): void {
   }
 }
