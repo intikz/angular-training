@@ -4,38 +4,92 @@
   <form [formGroup]="registrationForm">
     <div class="form-group">
       <label>Username</label>
-      <input formControlName="username" type="text" class="form-control" />
-    </div>
-
-    <div class="form-group">
-      <label>Pass</label>
-      <input formControlName="pass" type="password" class="form-control" />
-    </div>
-
-    <div class="form-group">
-      <label>confirm Pass</label>
       <input
-        formControlName="confirmPass"
-        type="password"
+        [class.is-invalid]="userName.invalid && userName.touched"
+        formControlName="username"
+        type="text"
         class="form-control"
       />
-    </div>
-
-    <div formGroupName="dire">
-      <div class="form-group">
-        <label>ciudad</label>
-        <input formControlName="city" type="text" class="form-control" />
+      <!-- 
+      <small
+        [class.d-none]="
+          registrationForm.get('username').valid ||
+          registrationForm.get('username').untouched
+        "
+        class="text-danger"
+        >Username required</small
+      > -->
+      <div *ngIf="userName.invalid && userName.touched" class="text-danger">
+        <small *ngIf="userName.errors?.required" class="text-danger"
+          >required</small
+        >
+        <small *ngIf="userName.errors?.minlength" class="text-danger"
+          >min length 3</small
+        >
+        <small *ngIf="userName.errors?.badName" class="text-danger"
+          >no puede decir {{ userName.errors?.badName.value }}</small
+        >
+        <!-- pero dice todo lo que escribiste no solo la palabra -->
       </div>
-      <div class="form-group">
-        <label>pais</label>
-        <input formControlName="pais" type="text" class="form-control" />
-      </div>
-    </div>
 
-    <button class="btn btn-primary" type="submit">register</button>
-    <button (click)="loadAPI()" class="btn btn-secondary ml-2" type="submit">
-      Load API data
-    </button>
+      <div class="form-group">
+        <label>Pass</label>
+        <input formControlName="pass" type="password" class="form-control" />
+      </div>
+
+      <div class="form-group">
+        <label>confirm Pass</label>
+        <input
+          [class.is-invalid]="registrationForm.errors?.mismatch"
+          formControlName="confirmPass"
+          type="password"
+          class="form-control"
+        />
+        <small *ngIf="userName.errors?.mismatch" class="text-danger"
+          >son distintas</small
+        >
+      </div>
+
+      <div formGroupName="dire">
+        <div class="form-group">
+          <label>ciudad</label>
+          <input formControlName="city" type="text" class="form-control" />
+        </div>
+        <div class="form-group">
+          <label>barrio</label>
+          <input formControlName="city" type="text" class="form-control" />
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>email</label>
+        <input
+          [class.is-invalid]="email.invalid && email.touched"
+          formControlName="email"
+          type="text"
+          class="form-control"
+        />
+        <small
+          class="text-danger"
+          [class.d-none]="email.valid || email.untouched"
+          >falta email si queres mandar spam</small
+        >
+      </div>
+
+      <div class="form-check mb-3">
+        <input
+          class="form-check-input"
+          formControlName="subscribe"
+          type="checkbox"
+        />
+        <label class="form-check-label">Send spam</label>
+      </div>
+
+      <button class="btn btn-primary" type="submit">register</button>
+      <button (click)="loadAPI()" class="btn btn-secondary ml-2" type="submit">
+        Load API data
+      </button>
+    </div>
   </form>
   {{ registrationForm.value | json }}
 </div>
