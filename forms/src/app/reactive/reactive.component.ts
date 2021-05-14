@@ -6,9 +6,11 @@ import {
   ReactiveFormsModule,
   FormBuilder,
   Validators,
+  FormArray,
 } from '@angular/forms';
 import { badNameValidator } from '../shared/username.validator';
 import { passValidator } from '../shared/pass.validator';
+import { EnrollmentService } from '../enrollment.service';
 
 @Component({
   selector: 'app-reactive',
@@ -17,7 +19,10 @@ import { passValidator } from '../shared/pass.validator';
 })
 export class ReactiveComponent implements OnInit {
   registrationForm: FormGroup;
-  constructor(private fb: FormBuilder) {}
+  constructor(
+    private fb: FormBuilder,
+    private _registrationService: EnrollmentService
+  ) {}
 
   // old way
   // registrationForm = new FormGroup({
@@ -50,6 +55,7 @@ export class ReactiveComponent implements OnInit {
           barrio: [''],
         }),
         email: [''],
+        altEmail: this.fb.array([]),
       },
       { validator: passValidator }
     );
@@ -90,5 +96,23 @@ export class ReactiveComponent implements OnInit {
 
   get email() {
     return this.registrationForm.get('email');
+  }
+
+  get altEmail() {
+    return this.registrationForm.get('altEmail') as FormArray;
+  }
+
+  //push control dynamically, into array
+  //every time
+  addAltEmail() {
+    this.altEmail.push(this.fb.control(''));
+  }
+
+  onSubmit() {
+    console.log(this.registrationForm.value);
+    this._registrationService.register(this.registrationForm.value).subscribe(
+      (response) => console.log('yay'),
+      (error) => console.error('error')
+    );
   }
 }

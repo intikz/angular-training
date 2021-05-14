@@ -22,4 +22,11 @@ export class EnrollmentService {
   errorHandler(error: HttpErrorResponse) {
     return throwError(error);
   }
+
+  register(userData) {
+    //return as observable
+    return this._http
+      .post<any>(this._url, userData)
+      .pipe(catchError(this.errorHandler));
+  }
 }

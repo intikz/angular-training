@@ -5,16 +5,15 @@ import { EnrollmentService } from '../enrollment.service';
 @Component({
   selector: 'app-tdf',
   templateUrl: './tdf.component.html',
-  styleUrls: []
+  styleUrls: [],
 })
-
 export class TDFComponent implements OnInit {
   topics = ['Angular', 'React', 'Vue'];
   topicHasError = true;
   submitted = false;
 
   errorMsg = '';
-
+  //errorMsg = '';
   userModel = new User(
     'rob',
     'rob@a.com',
@@ -32,16 +31,15 @@ export class TDFComponent implements OnInit {
   }
 
   onSubmit(userForm) {
-    console.log(userForm)
-    // this._enrollmentService.enroll(this.userModel).subscribe(
-    //   (data) => {
-    //     console.log('success!', data);
-    //     this.submitted = true;
-    //   },
-    //   (error) => (this.errorMsg = error.statusText)
-    // );
+    console.log(userForm);
+    this._enrollmentService.enroll(this.userModel).subscribe(
+      (data) => {
+        console.log('success!', data);
+        this.submitted = true;
+      },
+      (error) => (this.errorMsg = error.statusText) //(this.errorMsg = error.statusText)
+    );
   }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 }
